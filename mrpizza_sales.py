@@ -1,6 +1,6 @@
 import pandas as pd
 
-mrpi_d = pd.read_excel("C:/Users/Kimkangmin/Desktop/mrpi/상계20년 1월 영업일보.xlsx", sheet_name = '영업일보 일일매출', header = 0) 
+mrpi_d = pd.read_excel("C:/Users/Kimkangmin/Desktop/mrpi/상계20년 1월 영업일보.xlsx", sheet_name = '영업일보 일일매출') 
 # 데이터를 변수에 저장
 
 mrpi_d 
