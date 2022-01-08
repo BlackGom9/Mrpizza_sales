@@ -63,3 +63,76 @@ mrpi_d12 = change_df(mrpi_d12)
 mrpi_d = pd.concat([mrpi_d1, mrpi_d2, mrpi_d3, mrpi_d4, mrpi_d5, mrpi_d6, mrpi_d7, mrpi_d8, mrpi_d9, mrpi_d10, mrpi_d11, mrpi_d12]) # 2020년 총 매출정보
 
 mrpi_d
+
+mrpi_d.dtypes # 데이터 타입 확인
+
+mrpi_d['day'] = pd.to_datetime(mrpi_d['day']) # day의 데이터 타입 변경
+
+mrpi_d = mrpi_d.astype({'T_s' : 'int'}) 
+mrpi_d = mrpi_d.astype({'d_s' : 'int'}) 
+mrpi_d = mrpi_d.astype({'v_s' : 'int'}) 
+mrpi_d = mrpi_d.astype({'T_l' : 'int'}) 
+mrpi_d = mrpi_d.astype({'T_r' : 'int'}) 
+mrpi_d = mrpi_d.astype({'B_p' : 'int'}) 
+mrpi_d = mrpi_d.astype({'B_l' : 'int'}) 
+mrpi_d = mrpi_d.astype({'B_r' : 'int'}) 
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_d, x = 'day', y = 'T_s', ci = None)
+
+day_o = ["월", "화", "수", "목", "금", "토", "일"]
+plt.figure(figsize = (15, 10))
+sns.boxplot(data = mrpi_d, x = 'dayw', y = 'T_s', order = day_o)
+
+def monthl_T_s(sd, ed):
+    sd = datetime.strptime(sd, "%Y/%m/%d")
+    ed = datetime.strptime(ed, "%Y/%m/%d")
+    e = mrpi_d[(mrpi_d['day'] >= sd) & (mrpi_d['day'] <= ed)]
+    plt.figure(figsize = (10, 3))
+    f = sns.lineplot(data = e, x = 'day', y = 'T_s',ci = None)
+    return f
+
+def monthb_T_s(sd, ed):
+    sd = datetime.strptime(sd, "%Y/%m/%d")
+    ed = datetime.strptime(ed, "%Y/%m/%d")
+    e = mrpi_d[(mrpi_d['day'] >= sd) & (mrpi_d['day'] <= ed)]
+    plt.figure(figsize = (10, 3))
+    f = sns.boxplot(data = e, x = 'dayw', y = 'T_s', order = day_o)
+    return f
+
+monthl_T_s('2020/1/1', '2020/2/1')
+monthb_T_s('2020/1/1', '2020/2/1') # 1월 총매출 변화량
+
+monthl_T_s('2020/2/1', '2020/3/1')
+monthb_T_s('2020/2/1', '2020/3/1') # 2월 총매출 변화량
+
+monthl_T_s('2020/3/1', '2020/4/1')
+monthb_T_s('2020/3/1', '2020/4/1') # 3월 총매출 변화량
+
+monthl_T_s('2020/4/1', '2020/5/1')
+monthb_T_s('2020/4/1', '2020/5/1') # 4월 총매출 변화량
+
+monthl_T_s('2020/5/1', '2020/6/1')
+monthb_T_s('2020/5/1', '2020/6/1') # 5월 총매출 변화량
+
+monthl_T_s('2020/6/1', '2020/7/1')
+monthb_T_s('2020/6/1', '2020/7/1') # 6월 총매출 변화량
+
+monthl_T_s('2020/7/1', '2020/8/1')
+monthb_T_s('2020/7/1', '2020/8/1') # 7월 총매출 변화량
+
+monthl_T_s('2020/8/1', '2020/9/1')
+monthb_T_s('2020/8/1', '2020/9/1') # 8월 총매출 변화량
+
+monthl_T_s('2020/9/1', '2020/10/1')
+monthb_T_s('2020/9/1', '2020/10/1') # 9월 총매출 변화량
+
+monthl_T_s('2020/10/1', '2020/11/1')
+monthb_T_s('2020/10/1', '2020/11/1') # 10월 총매출 변화량
+
+monthl_T_s('2020/11/1', '2020/12/1')
+monthb_T_s('2020/11/1', '2020/12/1') # 11월 총매출 변화량
+
+monthl_T_s('2020/12/1', '2021/12/31')
+monthb_T_s('2020/12/1', '2021/12/31') # 12월 총매출 변화량
