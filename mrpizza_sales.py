@@ -77,6 +77,13 @@ mrpi_d = mrpi_d.astype({'B_p' : 'int'})
 mrpi_d = mrpi_d.astype({'B_l' : 'int'}) 
 mrpi_d = mrpi_d.astype({'B_r' : 'int'}) 
 
+mT_s = [sum(mrpi_d1['T_s']), sum(mrpi_d2['T_s']), sum(mrpi_d3['T_s']), sum(mrpi_d4['T_s']), sum(mrpi_d5['T_s']), sum(mrpi_d6['T_s']), sum(mrpi_d7['T_s']), sum(mrpi_d8['T_s']), sum(mrpi_d9['T_s']), sum(mrpi_d10['T_s']), sum(mrpi_d11['T_s']), sum(mrpi_d12['T_s'])] # 월별 총 매출 합
+m_k = ['1월', '2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (10, 3))
+plt.plot(m_k, mT_s) # 월별 총 매출 그래프
+
 plt.rc('font', family='Malgun Gothic')
 plt.figure(figsize = (25, 10))
 sns.lineplot(data = mrpi_d, x = 'day', y = 'T_s', ci = None)
@@ -136,3 +143,19 @@ monthb_T_s('2020/11/1', '2020/12/1') # 11월 총매출 변화량
 
 monthl_T_s('2020/12/1', '2021/12/31')
 monthb_T_s('2020/12/1', '2021/12/31') # 12월 총매출 변화량
+
+mrpi_d['p_Tv'] = mrpi_d['v_s'] / mrpi_d['T_s'] # 총 매출에서 내점 매출의 비율
+
+mv_s = [sum(mrpi_d1['v_s']), sum(mrpi_d2['v_s']), sum(mrpi_d3['v_s']), sum(mrpi_d4['v_s']), sum(mrpi_d5['v_s']), sum(mrpi_d6['v_s']), sum(mrpi_d7['v_s']), sum(mrpi_d8['v_s']), sum(mrpi_d9['v_s']), sum(mrpi_d10['v_s']), sum(mrpi_d11['v_s']), sum(mrpi_d12['v_s'])] 
+
+for i in range(0,12):
+    global m_p_Tv
+    m_p_Tv[i] = mv_s[i] / mT_s[i]
+    
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (10, 3))
+plt.plot(m_k, m_p_Tv) # 월별 총 매출에서 내점 매출의 비율
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_d, x = 'day', y = 'p_Tv', ci = None) # 일별 총 매출에서 내점 매출의 비율
