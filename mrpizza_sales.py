@@ -159,3 +159,24 @@ plt.plot(m_k, m_p_Tv) # 월별 총 매출에서 내점 매출의 비율
 plt.rc('font', family='Malgun Gothic')
 plt.figure(figsize = (25, 10))
 sns.lineplot(data = mrpi_d, x = 'day', y = 'p_Tv', ci = None) # 일별 총 매출에서 내점 매출의 비율
+
+day_o = ["월", "화", "수", "목", "금", "토", "일"]
+plt.figure(figsize = (10, 5))
+sns.boxplot(data = mrpi_d, x = 'dayw', y = 'p_Tv', order = day_o)
+
+s_B_p = [sum(mrpi_d1['B_p']), sum(mrpi_d2['B_p']), sum(mrpi_d3['B_p']), sum(mrpi_d4['B_p']), sum(mrpi_d5['B_p']), sum(mrpi_d6['B_p']), sum(mrpi_d7['B_p']), sum(mrpi_d8['B_p']), sum(mrpi_d9['B_p']), sum(mrpi_d10['B_p']), sum(mrpi_d11['B_p']), sum(mrpi_d12['B_p'])] # 월별 총 매출 합
+
+s_B_p
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (10, 3))
+plt.plot(m_k, s_B_p) # 월별 총 뷔페 인원
+
+mrpi_dp = mrpi_d[mrpi_d['B_p'] != 0] # 뷔페인원 0인 행 제거
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_dp, x = 'day', y = 'B_p', ci = None) # 일별 뷔페인원 
+
+plt.figure(figsize = (10, 5))
+sns.boxplot(data = mrpi_dp, x = 'dayw', y = 'B_p', order = day_o) 
