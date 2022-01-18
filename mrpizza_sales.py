@@ -180,3 +180,84 @@ sns.lineplot(data = mrpi_dp, x = 'day', y = 'B_p', ci = None) # 일별 뷔페인
 
 plt.figure(figsize = (10, 5))
 sns.boxplot(data = mrpi_dp, x = 'dayw', y = 'B_p', order = day_o) 
+
+mrpi_dp = mrpi_dp[(mrpi_dp['B_l'] != 0)] # 뷔페에 사용한 라지가 0인 경우 제거
+
+mrpi_dp['B_e1'] = mrpi_dp['B_l']*2 + mrpi_dp['B_r'] # 라지 1판이 레귤러 2판이라고 가정
+
+mrpi_dp['B_e2'] = mrpi_dp['B_l']*((35**2) / (28**2)) + mrpi_dp['B_r'] # 실제 크기로 차이 비교
+
+mrpi_dp['B_e3'] = mrpi_dp['B_l']*(1.5) + mrpi_dp['B_r'] # 조각 수 차이로 비교
+
+mrpi_dp['d_p1'] = abs(mrpi_dp['B_p'] - mrpi_dp['B_e1'])
+mrpi_dp['d_p2'] = abs(mrpi_dp['B_p'] - mrpi_dp['B_e2'])
+mrpi_dp['d_p3'] = abs(mrpi_dp['B_p'] - mrpi_dp['B_e3'])
+
+plt.rc('font', family='Malgun Gothic')
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p2'], ci = None)
+
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p3'], ci = None)
+
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p4'], ci = None)
+
+x = mrpi_dp.loc[:, ['B_p', 'B_l', 'B_r']]
+
+import statsmodels.formula.api as sm
+
+results = sm.ols(formula = 'B_p ~ B_l + B_r', data = mrpi_dp).fit()
+results.summary()
+
+results = sm.ols(formula = 'B_p ~ B_e2', data = mrpi_dp).fit()
+results.summary()
+
+results = sm.ols(formula = 'B_p ~ B_e3', data = mrpi_dp).fit()
+results.summary()
+
+results = sm.ols(formula = 'B_p ~ B_e4', data = mrpi_dp).fit()
+results.summary()
+
+x = mrpi_dp.loc[:, ['B_l', 'B_r']]
+y = mrpi_dp.loc[:, ['B_p']]
+
+from sklearn.linear_model import LinearRegression 
+
+model = LinearRegression()
+model.fit(x,y)
+
+y_p = model.predict(x)
+
+print(model.coef_)
+
+print(model.intercept_)
+
+relation_square = model.score(x, y)
+print('결정계수 : ', relation_square)
+
+ax1 = sns.distplot(y, hist = False, label = 'y실제')
+ax2 = sns.distplot(y_p, hist = False, label = 'y예측')
+plt.show()
+
+line_fitter = LinearRegression()
+line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e1'])
+
+line_fitter.predict([[60]])
+
+line_fitter = LinearRegression()
+line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e2'])
+
+line_fitter.predict([[60]])
+
+line_fitter = LinearRegression()
+line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e3'])
+
+line_fitter.predict([[60]])
+
+X = mrpi_dp['B_p']
+y = mrpi_dp['B_e']
+
+plt.plot(X, y, 'o')
+plt.plot(X,line_fitter.predict(X.values.reshape(-1,1)))
+plt.show()
