@@ -203,61 +203,67 @@ sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p3'], ci = None)
 plt.figure(figsize = (25, 10))
 sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p4'], ci = None)
 
-x = mrpi_dp.loc[:, ['B_p', 'B_l', 'B_r']]
+from statsmodels.formula.api import ols
 
-import statsmodels.formula.api as sm
+d_p1r = ols(formula = 'B_p ~ B_e1', data = mrpi_dp).fit()
+d_p1r.summary()
 
-results = sm.ols(formula = 'B_p ~ B_l + B_r', data = mrpi_dp).fit()
-results.summary()
-
-results = sm.ols(formula = 'B_p ~ B_e2', data = mrpi_dp).fit()
-results.summary()
-
-results = sm.ols(formula = 'B_p ~ B_e3', data = mrpi_dp).fit()
-results.summary()
-
-results = sm.ols(formula = 'B_p ~ B_e4', data = mrpi_dp).fit()
-results.summary()
-
-x = mrpi_dp.loc[:, ['B_l', 'B_r']]
-y = mrpi_dp.loc[:, ['B_p']]
-
-from sklearn.linear_model import LinearRegression 
-
-model = LinearRegression()
-model.fit(x,y)
-
-y_p = model.predict(x)
-
-print(model.coef_)
-
-print(model.intercept_)
-
-relation_square = model.score(x, y)
-print('결정계수 : ', relation_square)
-
-ax1 = sns.distplot(y, hist = False, label = 'y실제')
-ax2 = sns.distplot(y_p, hist = False, label = 'y예측')
+fig = plt.figure(figsize=(8,8))
+font_size = 15
+plt.scatter(mrpi_dp['B_p'],mrpi_dp['B_e1']) # 원 데이터 분포도
+plt.plot(mrpi_dp['B_e1'], d_p1r.fittedvalues,color='red') # 회귀직선 추가
 plt.show()
 
-line_fitter = LinearRegression()
-line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e1'])
+d_p2r = ols(formula = 'B_p ~ B_e2', data = mrpi_dp).fit()
+d_p2r.summary()
 
-line_fitter.predict([[60]])
-
-line_fitter = LinearRegression()
-line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e2'])
-
-line_fitter.predict([[60]])
-
-line_fitter = LinearRegression()
-line_fitter.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp['B_e3'])
-
-line_fitter.predict([[60]])
-
-X = mrpi_dp['B_p']
-y = mrpi_dp['B_e']
-
-plt.plot(X, y, 'o')
-plt.plot(X,line_fitter.predict(X.values.reshape(-1,1)))
+fig = plt.figure(figsize=(8,8))
+font_size = 15
+plt.scatter(mrpi_dp['B_p'],mrpi_dp['B_e2']) # 원 데이터 분포도
+plt.plot(mrpi_dp['B_e2'], d_p2r.fittedvalues,color='red') # 회귀직선 추가
 plt.show()
+
+d_p3r = ols(formula = 'B_p ~ B_e3', data = mrpi_dp).fit()
+d_p3r.summary()
+
+fig = plt.figure(figsize=(8,8))
+font_size = 15
+plt.scatter(mrpi_dp['B_p'],mrpi_dp['B_e3']) # 원 데이터 분포도
+plt.plot(mrpi_dp['B_e3'], d_p3r.fittedvalues,color='red') # 회귀직선 추가
+plt.show()
+
+
+# #### sklearn linearregression 방법
+
+from sklearn.linear_model import LinearRegression
+
+a = np.arange(0, 200, 0.1)
+
+def B_e(x, y):
+    B_e = LinearRegression()
+    B_e.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp[x])
+    z = B_e.predict([[y]])
+    print('인원이' , y, '명일 경우 레귤러 사이즈 피자가', z ,'판 필요합니다.')
+ 
+    global xx
+    
+    if x == 'B_e1':
+        xx = 2
+    elif x == 'B_e2':
+        xx = (35**2) / (28**2)
+    elif x == 'B_e3':
+        xx = 1.5
+    
+    print('라지 사이즈 피자만 사용한다고 가정한다면 ', z/xx, '판 필요합니다.')
+    
+    fig = plt.figure(figsize=(8,8))
+    font_size = 15
+    plt.scatter(mrpi_dp['B_p'],mrpi_dp[x]) # 원 데이터 분포도
+    plt.plot(a, B_e.coef_*a + B_e.intercept_, color = 'red') # 회귀직선
+# 뷔페 비율별 인원당 필요한 레귤러 예측량과 단순선형회귀직선
+
+B_e('B_e1', 50)
+
+B_e('B_e2', 50)
+
+B_e('B_e3', 50)
