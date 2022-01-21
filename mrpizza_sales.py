@@ -239,7 +239,7 @@ from sklearn.linear_model import LinearRegression
 
 a = np.arange(0, 200, 0.1)
 
-def B_e(x, y):
+def B_ep(x, y):
     B_e = LinearRegression()
     B_e.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp[x])
     z = B_e.predict([[y]])
@@ -255,15 +255,56 @@ def B_e(x, y):
         xx = 1.5
     
     print('라지 사이즈 피자만 사용한다고 가정한다면 ', z/xx, '판 필요합니다.')
-    
+# 뷔페 비율별 인원당 필요한 레귤러 예측량과 단순선형회귀직선
+
+def B_ef(x):   
+    B_e = LinearRegression()
+    B_e.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp[x])   
     fig = plt.figure(figsize=(8,8))
     font_size = 15
     plt.scatter(mrpi_dp['B_p'],mrpi_dp[x]) # 원 데이터 분포도
     plt.plot(a, B_e.coef_*a + B_e.intercept_, color = 'red') # 회귀직선
-# 뷔페 비율별 인원당 필요한 레귤러 예측량과 단순선형회귀직선
 
-B_e('B_e1', 50)
+def B_erf(x):
+    y = mrpi_dp['B_p'].values.reshape(-1,1)
+    z = mrpi_dp[x]
+    B_e = LinearRegression()
+    B_e.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp[x])
+    resid = z - B_e.predict(y)
+    
+    fig = plt.figure(figsize=(8,8))
+    plt.title(x)
+    plt.scatter(y,resid) ## 잔차도 출력
+    plt.show()
 
-B_e('B_e2', 50)
+def B_er(x):
+    y = mrpi_dp['B_p'].values.reshape(-1,1)
+    z = mrpi_dp[x]
+    B_e = LinearRegression()
+    B_e.fit(mrpi_dp['B_p'].values.reshape(-1,1), mrpi_dp[x])
+    resid = z - B_e.predict(y)
+    return resid
 
-B_e('B_e3', 50)
+plt.rcParams['axes.unicode_minus'] = False
+
+B_ep('B_e1', 50)
+B_ef('B_e1')
+B_erf('B_e1')
+
+B_ep('B_e2', 50)
+B_ef('B_e2')
+B_erf('B_e2')
+
+B_ep('B_e3', 50)
+B_ef('B_e3')
+B_erf('B_e3')
+
+B_erf('B_e1')
+
+B_erf('B_e2')
+
+B_erf('B_e3')
+
+fig = plt.figure(figsize=(8,8))
+plt.boxplot([B_er('B_e1'), B_er('B_e2'), B_er('B_e3')])
+plt.show()
