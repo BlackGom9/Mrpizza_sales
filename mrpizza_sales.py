@@ -168,6 +168,8 @@ s_B_p = [sum(mrpi_d1['B_p']), sum(mrpi_d2['B_p']), sum(mrpi_d3['B_p']), sum(mrpi
 
 s_B_p
 
+s_B_p[8] = (s_B_p[7] + s_B_p[9])/2 # 9월의 값이 누락 되었으므로 전월과 그 다음월의 평균값으로 대체
+
 plt.rc('font', family='Malgun Gothic')
 plt.figure(figsize = (10, 3))
 plt.plot(m_k, s_B_p) # 월별 총 뷔페 인원
