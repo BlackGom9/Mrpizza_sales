@@ -310,3 +310,98 @@ B_erf('B_e3')
 fig = plt.figure(figsize=(8,8))
 plt.boxplot([B_er('B_e1'), B_er('B_e2'), B_er('B_e3')])
 plt.show()
+
+mrpi_d1['d_l'] = mrpi_d1['T_l'] - mrpi_d1['B_l'] 
+mrpi_d2['d_l'] = mrpi_d2['T_l'] - mrpi_d2['B_l'] 
+mrpi_d3['d_l'] = mrpi_d3['T_l'] - mrpi_d3['B_l'] 
+mrpi_d4['d_l'] = mrpi_d4['T_l'] - mrpi_d4['B_l'] 
+mrpi_d5['d_l'] = mrpi_d5['T_l'] - mrpi_d5['B_l'] 
+mrpi_d6['d_l'] = mrpi_d6['T_l'] - mrpi_d6['B_l'] 
+mrpi_d7['d_l'] = mrpi_d7['T_l'] - mrpi_d7['B_l'] 
+mrpi_d8['d_l'] = mrpi_d8['T_l'] - mrpi_d8['B_l'] 
+mrpi_d9['d_l'] = mrpi_d9['T_l'] - mrpi_d9['B_l'] 
+mrpi_d10['d_l'] = mrpi_d10['T_l'] - mrpi_d10['B_l'] 
+mrpi_d11['d_l'] = mrpi_d11['T_l'] - mrpi_d11['B_l'] 
+mrpi_d12['d_l'] = mrpi_d12['T_l'] - mrpi_d12['B_l'] 
+# 월별 배달로 나간 라지 사이즈 개수
+
+mrpi_d1['d_r'] = mrpi_d1['T_r'] - mrpi_d1['B_r'] 
+mrpi_d2['d_r'] = mrpi_d2['T_r'] - mrpi_d2['B_r'] 
+mrpi_d3['d_r'] = mrpi_d3['T_r'] - mrpi_d3['B_r'] 
+mrpi_d4['d_r'] = mrpi_d4['T_r'] - mrpi_d4['B_r'] 
+mrpi_d5['d_r'] = mrpi_d5['T_r'] - mrpi_d5['B_r'] 
+mrpi_d6['d_r'] = mrpi_d6['T_r'] - mrpi_d6['B_r'] 
+mrpi_d7['d_r'] = mrpi_d7['T_r'] - mrpi_d7['B_r'] 
+mrpi_d8['d_r'] = mrpi_d8['T_r'] - mrpi_d8['B_r'] 
+mrpi_d9['d_r'] = mrpi_d9['T_r'] - mrpi_d9['B_r'] 
+mrpi_d10['d_r'] = mrpi_d10['T_r'] - mrpi_d10['B_r'] 
+mrpi_d11['d_r'] = mrpi_d11['T_r'] - mrpi_d11['B_r'] 
+mrpi_d12['d_r'] = mrpi_d12['T_r'] - mrpi_d12['B_r'] 
+# 월별 배달로 나간 레귤러 사이즈 개수
+
+mrpi_d1
+
+mrpi_d1 = mrpi_d1[(mrpi_d1['d_l'] > 0) & (mrpi_d1['d_r'] >= 0)] 
+mrpi_d2 = mrpi_d2[(mrpi_d2['d_l'] > 0) & (mrpi_d2['d_r'] >= 0)] 
+mrpi_d3 = mrpi_d3[(mrpi_d3['d_l'] > 0) & (mrpi_d3['d_r'] >= 0)] 
+mrpi_d4 = mrpi_d4[(mrpi_d4['d_l'] > 0) & (mrpi_d4['d_r'] >= 0)] 
+mrpi_d5 = mrpi_d5[(mrpi_d5['d_l'] > 0) & (mrpi_d5['d_r'] >= 0)] 
+mrpi_d6 = mrpi_d6[(mrpi_d6['d_l'] > 0) & (mrpi_d6['d_r'] >= 0)] 
+mrpi_d7 = mrpi_d7[(mrpi_d7['d_l'] > 0) & (mrpi_d7['d_r'] >= 0)] 
+mrpi_d8 = mrpi_d8[(mrpi_d8['d_l'] > 0) & (mrpi_d8['d_r'] >= 0)] 
+mrpi_d9 = mrpi_d9[(mrpi_d9['d_l'] > 0) & (mrpi_d9['d_r'] >= 0)] 
+mrpi_d10 = mrpi_d10[(mrpi_d10['d_l'] > 0) & (mrpi_d10['d_r'] >= 0)] 
+mrpi_d11 = mrpi_d11[(mrpi_d11['d_l'] > 0) & (mrpi_d11['d_r'] >= 0)] 
+mrpi_d12 = mrpi_d12[(mrpi_d12['d_l'] > 0) & (mrpi_d12['d_r'] >= 0)] 
+# 배달로 나간 라지 사이즈 개수 중 0 이하 제거 및 배달로 나간 레귤러 사이즈 개수 중 음수 제거
+# 뷔페로 나간 레귤러 사이즈가 없을 수도 있으므로 음수만 제거
+
+mrpi_d1['d_t'] = mrpi_d1['d_l']*(1.5) + mrpi_d1['d_r'] 
+mrpi_d2['d_t'] = mrpi_d2['d_l']*(1.5) + mrpi_d2['d_r'] 
+mrpi_d3['d_t'] = mrpi_d3['d_l']*(1.5) + mrpi_d3['d_r'] 
+mrpi_d4['d_t'] = mrpi_d4['d_l']*(1.5) + mrpi_d4['d_r'] 
+mrpi_d5['d_t'] = mrpi_d5['d_l']*(1.5) + mrpi_d5['d_r'] 
+mrpi_d6['d_t'] = mrpi_d6['d_l']*(1.5) + mrpi_d6['d_r'] 
+mrpi_d7['d_t'] = mrpi_d7['d_l']*(1.5) + mrpi_d7['d_r'] 
+mrpi_d8['d_t'] = mrpi_d8['d_l']*(1.5) + mrpi_d8['d_r'] 
+mrpi_d9['d_t'] = mrpi_d9['d_l']*(1.5) + mrpi_d9['d_r'] 
+mrpi_d10['d_t'] = mrpi_d10['d_l']*(1.5) + mrpi_d10['d_r'] 
+mrpi_d11['d_t'] = mrpi_d11['d_l']*(1.5) + mrpi_d11['d_r'] 
+mrpi_d12['d_t'] = mrpi_d12['d_l']*(1.5) + mrpi_d12['d_r'] 
+# 레귤러 사이즈 기준으로 배달 판매량
+# 뷔페 데이터를 통해서 얻은 '라지 사이즈는 레귤러 사이즈의 약 1.5배이다.'를 적용
+
+d_t = [sum(mrpi_d1['d_t']) / len(mrpi_d1), sum(mrpi_d2['d_t']) / len(mrpi_d1), sum(mrpi_d3['d_t']) / len(mrpi_d1), sum(mrpi_d4['d_t']) / len(mrpi_d1), sum(mrpi_d5['d_t']) / len(mrpi_d1), sum(mrpi_d6['d_t']) / len(mrpi_d1), sum(mrpi_d7['d_t']) / len(mrpi_d1), sum(mrpi_d8['d_t']) / len(mrpi_d1), sum(mrpi_d9['d_t']) / len(mrpi_d1), sum(mrpi_d10['d_t']) / len(mrpi_d1), sum(mrpi_d11['d_t']) / len(mrpi_d1), sum(mrpi_d12['d_t']) / len(mrpi_d1)] 
+# 월별 일 평균 피자 레귤러 사이즈 판매량
+
+d_t
+
+plt.figure(figsize = (10, 3))
+plt.plot(m_k, d_t)
+# 월별 일 평균 피자 레귤러 사이즈 판매량 그래프
+
+mrpi_d1['d_l'] = mrpi_d1['T_l'] - mrpi_d1['B_l'] 
+
+
+mrpi_d['d_l'] = mrpi_d['T_l'] - mrpi_d['B_l'] # 배달로 나간 라지 사이즈 개수 
+
+mrpi_d['d_r'] = mrpi_d['T_r'] - mrpi_d['B_r'] # 배달로 나간 레귤지 사이즈 개수 
+
+mrpi_d[mrpi_d['d_l'] <= 0]
+
+mrpi_d[mrpi_d['d_r'] < 0]
+
+mrpi_d = mrpi_d[(mrpi_d['d_l'] > 0) & (mrpi_d['d_r'] >= 0)] 
+# 배달로 나간 라지 사이즈 개수 중 0 이하 제거 및 배달로 나간 레귤러 사이즈 개수 중 음수 제거
+# 뷔페로 나간 레귤러 사이즈가 없을 수도 있으므로 음수만 제거
+
+mrpi_d
+
+mrpi_d['d_t'] = mrpi_d['d_l']*(1.5) + mrpi_d['d_r'] 
+# 레귤러 사이즈 기준으로 배달로 판매량
+# 뷔페 데이터를 통해서 얻은 '라지 사이즈는 레귤러 사이즈의 약 1.5배이다.'를 적용
+
+mrpi_d
+
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_d, x = 'day', y = 'd_t', ci = None)
