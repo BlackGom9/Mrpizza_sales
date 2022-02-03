@@ -177,6 +177,12 @@ ms_v = mrpi_d.sort_values(by = 'v_s', ascending = False)
 ms_v.head(15)
 # 1/24 ~ 1/27 설날
 
+ms_d1 = mrpi_d.sort_values(by = 'd_s')
+ms_d1.head(15) 
+
+ms_v1 = mrpi_d.sort_values(by = 'v_s')
+ms_v1.head(15)
+
 s_B_p = [sum(mrpi_d1['B_p']), sum(mrpi_d2['B_p']), sum(mrpi_d3['B_p']), sum(mrpi_d4['B_p']), sum(mrpi_d5['B_p']), sum(mrpi_d6['B_p']), sum(mrpi_d7['B_p']), sum(mrpi_d8['B_p']), sum(mrpi_d9['B_p']), sum(mrpi_d10['B_p']), sum(mrpi_d11['B_p']), sum(mrpi_d12['B_p'])] # 월별 총 매출 합
 
 s_B_p
