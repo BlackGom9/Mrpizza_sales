@@ -164,6 +164,15 @@ day_o = ["월", "화", "수", "목", "금", "토", "일"]
 plt.figure(figsize = (10, 5))
 sns.boxplot(data = mrpi_d, x = 'dayw', y = 'p_Tv', order = day_o)
 
+ms_d = mrpi_d.sort_values(by = 'd_s', ascending = False)
+ms_d.head(15) 
+# 4/29 ~ 4/30 T데이 할인
+# 7/22 ~ 7/23 T데이 할인
+
+ms_v = mrpi_d.sort_values(by = 'v_s', ascending = False)
+ms_v.head(15)
+# 1/24 ~ 1/27 설날
+
 s_B_p = [sum(mrpi_d1['B_p']), sum(mrpi_d2['B_p']), sum(mrpi_d3['B_p']), sum(mrpi_d4['B_p']), sum(mrpi_d5['B_p']), sum(mrpi_d6['B_p']), sum(mrpi_d7['B_p']), sum(mrpi_d8['B_p']), sum(mrpi_d9['B_p']), sum(mrpi_d10['B_p']), sum(mrpi_d11['B_p']), sum(mrpi_d12['B_p'])] # 월별 총 매출 합
 
 s_B_p
