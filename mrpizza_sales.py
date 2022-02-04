@@ -216,13 +216,13 @@ mrpi_dp['d_p3'] = abs(mrpi_dp['B_p'] - mrpi_dp['B_e3'])
 
 plt.rc('font', family='Malgun Gothic')
 plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p1'], ci = None)
+
+plt.figure(figsize = (25, 10))
 sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p2'], ci = None)
 
 plt.figure(figsize = (25, 10))
 sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p3'], ci = None)
-
-plt.figure(figsize = (25, 10))
-sns.lineplot(data = mrpi_dp, x = 'day', y = mrpi_dp['d_p4'], ci = None)
 
 from statsmodels.formula.api import ols
 
