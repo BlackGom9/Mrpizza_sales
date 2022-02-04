@@ -324,6 +324,75 @@ fig = plt.figure(figsize=(8,8))
 plt.boxplot([B_er('B_e1'), B_er('B_e2'), B_er('B_e3')])
 plt.show()
 
+md_s = [sum(mrpi_d1['d_s']), sum(mrpi_d2['d_s']), sum(mrpi_d3['d_s']), sum(mrpi_d4['d_s']), sum(mrpi_d5['d_s']), sum(mrpi_d6['d_s']), sum(mrpi_d7['d_s']), sum(mrpi_d8['d_s']), sum(mrpi_d9['d_s']), sum(mrpi_d10['d_s']), sum(mrpi_d11['d_s']), sum(mrpi_d12['d_s'])] 
+# 월별 총 매출 합
+
+md_s
+
+plt.figure(figsize = (10, 3))
+plt.plot(m_k, md_s) 
+# 월별 배달 매출 그래프
+
+plt.figure(figsize = (25, 10))
+sns.lineplot(data = mrpi_d, x = 'day', y = 'd_s', ci = None)
+
+plt.figure(figsize = (10, 5))
+sns.boxplot(data = mrpi_d, x = 'dayw', y = 'd_s', order = day_o)
+
+def monthl_d_s(sd, ed):
+    sd = datetime.strptime(sd, "%Y/%m/%d")
+    ed = datetime.strptime(ed, "%Y/%m/%d")
+    e = mrpi_d[(mrpi_d['day'] >= sd) & (mrpi_d['day'] <= ed)]
+    plt.figure(figsize = (10, 3))
+    f = sns.lineplot(data = e, x = 'day', y = 'd_s',ci = None)
+    return f 
+# 월별 배달 매출 선그래프
+
+def monthb_d_s(sd, ed):
+    sd = datetime.strptime(sd, "%Y/%m/%d")
+    ed = datetime.strptime(ed, "%Y/%m/%d")
+    e = mrpi_d[(mrpi_d['day'] >= sd) & (mrpi_d['day'] <= ed)]
+    plt.figure(figsize = (10, 3))
+    f = sns.boxplot(data = e, x = 'dayw', y = 'd_s', order = day_o)
+    return f
+# 월별 총 매출 박스그래프
+
+monthl_d_s('2020/1/1', '2020/2/1')
+monthb_d_s('2020/1/1', '2020/2/1') # 1월 배달 매출 변화량
+
+monthl_d_s('2020/2/1', '2020/3/1')
+monthb_d_s('2020/2/1', '2020/3/1') # 2월 배달 매출 변화량
+
+monthl_d_s('2020/3/1', '2020/4/1')
+monthb_d_s('2020/3/1', '2020/4/1') # 3월 배달 매출 변화량
+
+monthl_d_s('2020/4/1', '2020/5/1')
+monthb_d_s('2020/4/1', '2020/5/1') # 4월 배달 매출 변화량
+
+monthl_d_s('2020/5/1', '2020/6/1')
+monthb_d_s('2020/5/1', '2020/6/1') # 5월 배달 매출 변화량
+
+monthl_d_s('2020/6/1', '2020/7/1')
+monthb_d_s('2020/6/1', '2020/7/1') # 6월 배달 매출 변화량
+
+monthl_d_s('2020/7/1', '2020/8/1')
+monthb_d_s('2020/7/1', '2020/8/1') # 7월 배달 매출 변화량
+
+monthl_d_s('2020/8/1', '2020/9/1')
+monthb_d_s('2020/8/1', '2020/9/1') # 8월 배달 매출 변화량
+
+monthl_d_s('2020/9/1', '2020/10/1')
+monthb_d_s('2020/9/1', '2020/10/1') # 9월 배달 매출 변화량
+
+monthl_d_s('2020/10/1', '2020/11/1')
+monthb_d_s('2020/10/1', '2020/11/1') # 10월 배달 매출 변화량
+
+monthl_d_s('2020/11/1', '2020/12/1')
+monthb_d_s('2020/11/1', '2020/12/1') # 11월 배달 매출 변화량
+
+monthl_d_s('2020/12/1', '2021/1/1')
+monthb_d_s('2020/12/1', '2021/1/1') # 12월 배달 매출 변화량
+
 mrpi_d1['d_l'] = mrpi_d1['T_l'] - mrpi_d1['B_l'] 
 mrpi_d2['d_l'] = mrpi_d2['T_l'] - mrpi_d2['B_l'] 
 mrpi_d3['d_l'] = mrpi_d3['T_l'] - mrpi_d3['B_l'] 
