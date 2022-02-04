@@ -320,12 +320,6 @@ B_ep('B_e3', 50)
 B_ef('B_e3')
 B_erf('B_e3')
 
-B_erf('B_e1')
-
-B_erf('B_e2')
-
-B_erf('B_e3')
-
 fig = plt.figure(figsize=(8,8))
 plt.boxplot([B_er('B_e1'), B_er('B_e2'), B_er('B_e3')])
 plt.show()
